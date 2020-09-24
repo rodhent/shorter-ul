@@ -4,8 +4,10 @@ import Hero from './components/pages/Hero.jsx'
 import Shoter from './components/pages/Shoter.jsx'
 import Body from './components/pages/Body.jsx'
 import Footer from './components/pages/Footer.jsx'
+import BodyBottom from './components/pages/BodyBotton.jsx'
 
 import './App.css'
+
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
       <Hero />
       <Shoter />
       <Body />
+      <BodyBottom />
       <Footer />
     </div>
   )
