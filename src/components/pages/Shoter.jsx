@@ -1,29 +1,49 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
 
-const Shoter = () => {
-	const { handleSubmit, register, errors } = useForm()
-	const onSub = (input) => {}
+import LinkBox from "./LinkBox";
 
-	return (
-		<div>
-			<form onSubmit={handleSubmit(onSub)}>
-				<input
-					type="text"
-					name="urlShort"
-					placeholder="Enter your URL"
-					ref={register({
-						required: 'Required',
-						pattern: {
-							// value: '',
-							message: 'please enter a URL',
-						},
-					})}
-				/>
-				<button type="submit"> Shorten It!</button>
-			</form>
-		</div>
-	)
-}
+const Short = () => {
+  const { handleSubmit, register, errors } = useForm();
+  const [shortUrl, setShortUrl] = useState([]);
+  const POST_URL = "https://rel.ink/api/links/";
+  const onSub = (input) => {
+    // console.log(input);
 
-export default Shoter
+    axios
+      .post(POST_URL, input)
+      .then((res) => {
+        setShortUrl(res.data);
+      })
+      .catch((err) => console.log(`Error: ${err}`))
+      .finally();
+  };
+
+  const { hashid, url } = shortUrl;
+  //   console.log(hashid, url);
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit(onSub)}>
+        <input
+          type="text"
+          name="url"
+          placeholder="Enter your URL"
+          ref={register({
+            required: "Required",
+            pattern: {
+              // value: '',
+              message: "please enter a URL",
+            },
+          })}
+        />
+        {errors.url && errors.url.message}
+        <button type="submit">Shorten It!</button>
+      </form>
+      <LinkBox hashid={hashid} url={url} />
+    </div>
+  );
+};
+
+export default Short;
