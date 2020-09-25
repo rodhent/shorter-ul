@@ -1,12 +1,29 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 const Shoter = () => {
-    return (
-      <div>
-        <input type="text" />
-        <button> Shorten It!</button>
-      </div>
-    );
+	const { handleSubmit, register, errors } = useForm()
+	const onSub = (input) => {}
+
+	return (
+		<div>
+			<form onSubmit={handleSubmit(onSub)}>
+				<input
+					type="text"
+					name="urlShort"
+					placeholder="Enter your URL"
+					ref={register({
+						required: 'Required',
+						pattern: {
+							// value: '',
+							message: 'please enter a URL',
+						},
+					})}
+				/>
+				<button type="submit"> Shorten It!</button>
+			</form>
+		</div>
+	)
 }
 
 export default Shoter
