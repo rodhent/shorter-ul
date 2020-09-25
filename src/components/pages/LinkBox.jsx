@@ -7,7 +7,7 @@ const LinkBox = ({ hashid, url }) => {
         <p></p>
       </div>
       <div>
-        <a href="#">{`https://rel.ink/${hashid}`} </a>
+        <a href={`https://rel.ink/${hashid}`}>{`https://rel.ink/${hashid}`} </a>
       </div>
       <button>COPY</button>
     </div>
